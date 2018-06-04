@@ -18,6 +18,30 @@ Ninja.prototype.sayName = function(){
 
 }
 
+Ninja.prototype.punch = function(ninja){
+    if (ninja instanceof  Ninja) {
+        console.log(`${ninja.name} was punched by ${this.name} and lost 5 health.`)
+        ninja.health -= 5;
+        ninja.showStats();
+    } else {
+        console.log("Ninjas only punch ninjas.")
+    }
+    return this;
+
+}
+
+Ninja.prototype.kick = function(ninja){
+    if (ninja instanceof Ninja) {
+        console.log(`${ninja.name} was kicked by ${this.name} and lost ${15*this.readStrength()} health.`)
+        ninja.health -= 15*this.readStrength();
+        ninja.showStats();
+    } else {
+        console.log("Ninjas can only kick ninjas.")
+    }
+    return this;
+
+}
+
 Ninja.prototype.showStats = function(){
     console.log("name", this.name);
     console.log("health", this.health);
@@ -29,8 +53,11 @@ Ninja.prototype.showStats = function(){
 
 Ninja.prototype.drinkSake = function(){
     this.health += 10;
+    console.log("sake drank");
     return this;
 }
 
+const cat = {};
 var dave = new Ninja("Dave");
-dave.sayName().showStats().drinkSake();
+var steve = new Ninja("Steve");
+dave.punch(cat).kick(steve).drinkSake();
